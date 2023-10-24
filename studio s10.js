@@ -83,7 +83,7 @@ function rotate_matrix(M) {
 
     for (let i = 0; i < n; i = i + 1) {
         for (let j = i + 1; j < n; j = j + 1) {
-            swap(i, j, j, i); //transpose   
+            swap(i, j, j, i); //transpose r1, c1, r2, c2  
         }
     }
     
@@ -103,7 +103,7 @@ const M =
 rotate_matrix(M);
 M;
 // M should have become
-// [[13,  9, 5, 1], 
+// [[13,  9, 5, 1], element 9 is in row 0 and column 1. swap with 14, which is in row 1 and column 0 
 //  [14, 10, 6, 2], 
 //  [15, 11, 7, 3], 
 //  [16, 12, 8, 4]]
