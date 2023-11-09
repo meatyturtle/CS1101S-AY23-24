@@ -50,6 +50,22 @@ function mergeB(xs, ys) {
 }
 mergeB(list(1, 3, 7, 9) ,list(2, 3, 5, 6, 11));
 
+//question 2C
+function mergeC(xs, xs_len, ys, ys_len) {
+    let result = [];
+    let result_len = xs_len + ys_len;
+    for (let k = 0; k < result_len; k = k + 1) {
+        for (let i = 0; i < xs_len; i = i + 1) { //iterate thru xs
+            for (let j = 0; j < ys_len; j = j + 1) { //iterate thru ys
+                if (xs[i] < ys[j]) {
+                    result[i] = xs[i];
+                }
+            }
+        }        
+    }
+    return result;
+}
+
 //question 3A
 function are_equal_sets(set1, set2) {
     if (length(set1) !== length(set2)) {
