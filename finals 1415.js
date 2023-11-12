@@ -89,10 +89,10 @@ function powerset(set) {
     if (is_null(set)) {
         return list(null);
     } else {
-        const bruh = powerset(tail(set));
+        const next = powerset(tail(set));
         return append(
-                    map(x => pair(head(set), x), bruh), 
-                    bruh);
+                    map(x => pair(head(set), x), next), 
+                    next);
     }
 }
 
