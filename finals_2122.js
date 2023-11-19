@@ -102,3 +102,37 @@ display(fast_submatrix_sum(S, 1, 2, 1, 2)); // returns 4
 display(fast_submatrix_sum(S, 0, 0, 2, 3)); // returns 42
 display(fast_submatrix_sum(S, 1, 1, 2, 2)); // returns 16
 display(fast_submatrix_sum(S, 0, 1, 2, 2)); // returns 21
+
+function hold_stream(xs) {
+    return is_null(tail(xs))
+           ? pair(head(xs), () => hold_stream(xs))
+           : pair(head(xs), () => hold_stream(tail(xs)));
+}
+
+display(hold_stream(enum_list(1, 5)));
+//returns a stream containing 1, 2, 3, 4, 5, 5, 5, 5, ...
+display(hold_stream(enum_list(1, 3)));
+// returns a stream containing 1, 2, 3, 3, 3, 3, 3, 3, ...
+display(hold_stream(list(2, 4, 6)));
+// returns a stream containing 2, 4, 6, 6, 6, 6, 6, 6, ...
+display(hold_stream(list(1)));
+// returns a stream containing 1, 1, 1, 1, 1, 1, 1, 1, ...
+
+function search_stream(xs, pos, x) {
+    return is_null(xs) || pos < 0
+           ? false
+           : head(xs) === x
+                ? true
+                : search_stream(stream_tail(xs), pos - 1, x);
+
+}
+
+const ones = pair(1, () => ones);
+const integers = pair(1, () => stream_map(x => x + 1, integers));
+const finite_stream = enum_stream(1, 5);
+search_stream(ones, 0, 1); // returns true
+search_stream(ones, 0, 2); // returns false
+search_stream(integers, 4, 4); // returns true
+search_stream(integers, 4, 5); // returns true (corrected via announcement)
+search_stream(integers, 3, 5); // returns false
+search_stream(finite_stream, 6, 10); // returns false 
